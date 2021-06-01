@@ -1,0 +1,46 @@
+<div class="container">
+
+<a routerLink="angular">Angular</a> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<a routerLink="login">Login</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<a routerLink="register">Register</a>&nbsp;&nbsp;&nbsp;&nbsp;
+
+<router-outlet></router-outlet>
+  <h1> To Do List</h1>
+ 
+<form class="todo-form" #f="ngForm" (ngSubmit)="onSubmit(f)">
+    <input type="text" id="title" name="title"  ngModel> &nbsp;&nbsp;&nbsp;
+    <input type="date" id="date" name="deadline" ngModel>
+  <div>
+    <button type= "submit" class="btn-floating waves-effect waves-light green"><i 
+      class="material-icons">add</i></button>
+  </div>
+</form>
+
+  <ul class="todo-list">
+    <li *ngFor="let todo of todos">
+      <div *ngIf="!this.todo.isComplete">
+        <div>{{this.todo.title}}</div>
+        <div>{{this.todo.deadline|date:'shortDate'}}</div>
+        <div>
+          <button (click)="onComplete(this.todo.id)" class="btn-floating waves-effect waves-light blue"><i class="material-icons">check</i></button>
+          <button (click)="onDelete(this.todo.id)" class="btn-floating waves-effect waves-light red"><i class="material-icons">delete</i></button>
+        </div>
+      </div>
+    </li>
+
+    <br>
+    <br>
+    <h5>Completed List</h5>
+    <br>
+    <li *ngFor="let todo of todos">
+      <div *ngIf="this.todo.isComplete">
+        <div>{{this.todo.title}}</div>
+        <div>{{this.todo.deadline|date:'shortDate'}}</div>
+        <div>
+          <button (click)="onDelete(this.todo.id)" class="btn-floating waves-effect waves-light red"><i class="material-icons">delete</i></button>
+         
+        </div>
+      </div>
+    </li>
+  </ul>
+</div>
